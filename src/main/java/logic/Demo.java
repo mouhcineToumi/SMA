@@ -6,7 +6,7 @@ public class Demo {
 
         Graph graph = new Graph();
         for( int i =0; i<7; i++ ){
-            graph.addNode(Integer.toString(i));
+            graph.addNode(new Node(Integer.toString(i)));
         }
 
         graph.addEdge("0", "1");

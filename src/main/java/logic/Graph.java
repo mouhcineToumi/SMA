@@ -15,6 +15,14 @@ public class Graph {
         adjList = new HashMap<>();
     }
 
+
+    public void addNode(Node node) {
+        if (!nodes.containsKey(node.label) ){
+            nodes.put(node.label, node);
+            adjList.put(node.label, new ArrayList<String>());
+        }
+    }
+
     public void addNode(String label) {
         if (!nodes.containsKey(label) ){
             nodes.put(label, new Node(label));
@@ -30,7 +38,6 @@ public class Graph {
             addEdge(to, from);
         }
     }
-
 
     public void dfs( String label ){
         if( nodes.get(label).isVisited() ) {
@@ -53,8 +60,6 @@ public class Graph {
             dfs(child);
         }
     }
-
-
 
     public void bfs(String label) {
         if( nodes.get(label).childs.size() == 0){
