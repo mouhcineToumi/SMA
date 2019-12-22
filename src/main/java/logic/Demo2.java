@@ -23,7 +23,6 @@ public class Demo2  {
         for (int i = 0; i < 5; i++) {
             new JadeContainer().getContainer();
         }
-
         // define the graph nodes
         graph.addNode(new Node("Node"));
         for( int i =1; i<6; i++ ){
@@ -34,11 +33,11 @@ public class Demo2  {
         graph.addEdge("Node", "Node-2");
         graph.addEdge("Node-2", "Node-3");
         graph.addEdge("Node-2", "Node-4");
-
         // define intrus
         graph.nodes.get("Node-4").contaminate();
 
         itinéraire = graph.dfs(graph.nodes.get("Node"), new ArrayList<Node>());
+
 
         try {
             // fixAgent = mainContainer.createNewAgent("fixed", "ensias.tp3.AgentFixe", new Object[]{""});
