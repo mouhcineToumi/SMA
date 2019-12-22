@@ -22,23 +22,37 @@ public class Graph {
     }
 
     public void addEdge(String from, String to) {
-        if ( !nodes.get(from).isChild(to) ){
-            nodes.get(from).childs.add( nodes.get(from) );
+        if ( ! nodes.get(from).isChild(to) ){
+            nodes.get(from).addChild( nodes.get(to) );
             adjList.get(from).add(to);
+            addEdge(to, from);
         }
     }
 
 
     public void dfs( String label ){
-        if( nodes.get(label).visited ) {
+        if( nodes.get(label).isVisited() ) {
             return;
         }
         System.out.println(label);
-        nodes.get(label).visited = true;
+        nodes.get(label).visit();
         for ( String child: adjList.get(label)){
             dfs(child);
         }
     }
+
+    public void dfs( Node root ){
+        if( root.isVisited() ) {
+            return;
+        }
+        System.out.println(root.label);
+        root.visit();
+        for ( Node child: root.childs){
+            dfs(child);
+        }
+    }
+
+
 
 
     public static void main(String[] args) {
@@ -53,8 +67,7 @@ public class Graph {
         graph.addEdge("2", "3");
         graph.addEdge("2", "4");
 
-
-        graph.dfs("0");
+        graph.dfs( graph.nodes.get("0") );
     }
 
 
