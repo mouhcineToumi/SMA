@@ -17,9 +17,17 @@ public class Node {
         childs = new ArrayList<Node>();
     }
 
+    public boolean isVisited() {
+        return this.visited;
+    }
+
+    public void visit() {
+        this.visited = true;
+    }
+
     public boolean isChild(String label) {
         for ( Node node: childs){
-            if ( node.label == label){
+            if ( node.label.equals(label)){
                 return  true;
             }
         }
@@ -27,7 +35,7 @@ public class Node {
     }
 
     public void addChild(Node node) {
-        if( ! childs.contains(node)) {
+        if ( !isChild(node.label)) {
             childs.add(node);
         }
     }
