@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Graph {
@@ -25,6 +26,7 @@ public class Graph {
         if ( ! nodes.get(from).isChild(to) ){
             nodes.get(from).addChild( nodes.get(to) );
             adjList.get(from).add(to);
+            // because undirected
             addEdge(to, from);
         }
     }
@@ -54,23 +56,55 @@ public class Graph {
 
 
 
-
-    public static void main(String[] args) {
-
-        Graph graph = new Graph();
-        for( int i =0; i<5; i++ ){
-            graph.addNode(Integer.toString(i));
+    public void bfs(String label) {
+        if( nodes.get(label).childs.size() == 0){
+            return;
         }
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.add(nodes.get(label));
 
-        graph.addEdge("0", "1");
-        graph.addEdge("0", "2");
-        graph.addEdge("2", "3");
-        graph.addEdge("2", "4");
+        while (!queue.isEmpty()) {
+            Node currentFirst = queue.removeFirst();
+            if (currentFirst.isVisited())
+                continue;
 
-        graph.dfs( graph.nodes.get("0") );
+            System.out.println(currentFirst.label);
+            currentFirst.visit();
+            List<Node> allNeighbors = nodes.get(currentFirst.label).childs;
+            if (allNeighbors == null)
+                continue;
+            for (Node neighbor : allNeighbors) {
+                if (!neighbor.isVisited()) {
+                    queue.add(neighbor);
+                }
+            }
+        }
     }
 
 
+    public void bfs(Node root) {
+        if( root.childs.size() == 0){
+            return;
+        }
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.add(root);
 
+        while (!queue.isEmpty()) {
+            Node currentFirst = queue.removeFirst();
+            if (currentFirst.isVisited())
+                continue;
+
+            System.out.println(currentFirst.label);
+            currentFirst.visit();
+            List<Node> allNeighbors = nodes.get(currentFirst.label).childs;
+            if (allNeighbors == null)
+                continue;
+            for (Node neighbor : allNeighbors) {
+                if (!neighbor.isVisited()) {
+                    queue.add(neighbor);
+                }
+            }
+        }
+    }
 
 }

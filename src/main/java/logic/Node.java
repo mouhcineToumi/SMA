@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Node {
 
-
     String label;
     boolean contaminated, visited;
     List<Node> childs;
@@ -40,3 +39,6 @@ public class Node {
         }
     }
 }
+
+
+
