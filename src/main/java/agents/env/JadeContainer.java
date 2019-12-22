@@ -14,7 +14,7 @@ public class JadeContainer {
 
         //Le main container associé est déjà démarré sur localhost
         profile.setParameter(ProfileImpl.MAIN_HOST, "localhost") ;
-        profile.setParameter(ProfileImpl.CONTAINER_NAME, "BookMarket") ;
+        profile.setParameter(ProfileImpl.CONTAINER_NAME, "Node") ;
         container = rt.createAgentContainer(profile);
     }
     public ContainerController getContainer(){ return container; }
