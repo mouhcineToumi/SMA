@@ -1,9 +1,9 @@
 package logic;
 
 import jade.core.Agent;
-import jade.core.Location;
 import jade.core.behaviours.CyclicBehaviour;
 
+import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +12,11 @@ public class AgentMobile extends Agent {
 
     private List<Node> itineraire ;
     private int compteur = 0;
+
+
+    public void foundIntrus( String loc) {
+        System.out.println("Intrus found in :" + loc);
+    }
 
 
     public void setup() {
@@ -26,9 +31,12 @@ public class AgentMobile extends Agent {
                 public void action() {
                     Iterator<Node> iterator = itineraire.listIterator();
                     try{
-                        //L'agent MOVE vers le premier container
+                        // Move to next container
                         etat++;
-                        destination =(Node)iterator.next();
+                        destination =iterator.next();
+                        if ( destination.isContaminated() ){
+                            foundIntrus(destination.label);
+                        }
                         System.out.println(destination.label);
                         iterator.remove();
                         myAgent.doMove(destination.loc);
@@ -49,7 +57,6 @@ public class AgentMobile extends Agent {
     @Override
     protected void beforeMove() {
         super.beforeMove();
-
 //        System.out.println("moving: " + this.getLocalName() );
     }
 
