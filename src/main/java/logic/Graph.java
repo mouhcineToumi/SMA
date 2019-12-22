@@ -8,36 +8,33 @@ public class Graph {
 
     HashMap<String, List<String>> adjList;
     HashMap<String, Node> nodes;
-    HashMap<String, Boolean> visited;
 
     public  Graph() {
         nodes = new HashMap<>();
         adjList = new HashMap<>();
-        visited = new HashMap<>();
     }
 
     public void addNode(String label) {
         if (!nodes.containsKey(label) ){
             nodes.put(label, new Node(label));
-            visited.put(label, false);
             adjList.put(label, new ArrayList<String>());
-
         }
     }
 
     public void addEdge(String from, String to) {
-        if ( !adjList.get(from).contains(to) ){
+        if ( !nodes.get(from).isChild(to) ){
+            nodes.get(from).childs.add( nodes.get(from) );
             adjList.get(from).add(to);
         }
     }
 
 
     public void dfs( String label ){
-        if( visited.get(label) ) {
+        if( nodes.get(label).visited ) {
             return;
         }
         System.out.println(label);
-        visited.replace(label, true);
+        nodes.get(label).visited = true;
         for ( String child: adjList.get(label)){
             dfs(child);
         }
