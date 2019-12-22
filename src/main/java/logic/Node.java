@@ -5,14 +5,15 @@ import java.util.List;
 
 public class Node {
 
+    String label;
     boolean contaminated;
     List<Node> childs;
-    Node parent;
 
 
-    public Node() {
+
+    public Node(String label){
+        this.label = label;
         contaminated =false;
         childs = new ArrayList<Node>();
-        parent = new Node();
     }
 }
