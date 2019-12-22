@@ -1,15 +1,16 @@
 package logic;
 
 import jade.core.ContainerID;
+import jade.util.leap.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node {
+public class Node implements Serializable {
 
     ContainerID loc;
     String label;
-    boolean contaminated, visited;
+    boolean contaminated, visited, full;
     List<Node> childs;
 
     public Node(String label){
