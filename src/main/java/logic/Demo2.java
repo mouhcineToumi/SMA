@@ -14,7 +14,6 @@ public class Demo2  {
     Graph graph = new Graph();
 
 
-
     private ContainerController mainContainer ;
     private AgentController mobileAgent, fixAgent;
     private List<Node> itinéraire;
@@ -36,13 +35,16 @@ public class Demo2  {
         graph.addEdge("Node-2", "Node-3");
         graph.addEdge("Node-2", "Node-4");
 
+        // define intrus
+        graph.nodes.get("Node-4").contaminate();
+
         itinéraire = graph.dfs(graph.nodes.get("Node"), new ArrayList<Node>());
 
         try {
             // fixAgent = mainContainer.createNewAgent("fixed", "ensias.tp3.AgentFixe", new Object[]{""});
             // fixAgent.start();
             mobileAgent = mainContainer.createNewAgent(
-                    "Touré", "logic.AgentMobile",new Object []{itinéraire}) ;
+                    "MAgent", "logic.AgentMobile",new Object []{itinéraire}) ;
             mobileAgent.start();
         } catch (StaleProxyException e) { e.printStackTrace();
         }

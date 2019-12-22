@@ -10,8 +10,10 @@ public class Node implements Serializable {
 
     ContainerID loc;
     String label;
-    boolean contaminated, visited, full;
     List<Node> childs;
+    private boolean contaminated;
+    private boolean visited;
+
 
     public Node(String label){
         this.label = label;
@@ -49,6 +51,14 @@ public class Node implements Serializable {
         loc = new ContainerID();
         loc.setName(name);
         loc.setAddress("localhost");
+    }
+
+    public void contaminate(){
+        this.contaminated = true;
+    }
+
+    public boolean isContaminated(){
+        return  contaminated;
     }
 }
 
