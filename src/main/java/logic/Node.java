@@ -1,10 +1,13 @@
 package logic;
 
+import jade.core.ContainerID;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
 
+    ContainerID loc;
     String label;
     boolean contaminated, visited;
     List<Node> childs;
@@ -14,6 +17,7 @@ public class Node {
         contaminated =false;
         visited = false;
         childs = new ArrayList<Node>();
+        setContainerId(label);
     }
 
     public boolean isVisited() {
@@ -37,6 +41,13 @@ public class Node {
         if ( !isChild(node.label)) {
             childs.add(node);
         }
+    }
+
+
+    public void setContainerId( String name ) {
+        loc = new ContainerID();
+        loc.setName(name);
+        loc.setAddress("localhost");
     }
 }
 

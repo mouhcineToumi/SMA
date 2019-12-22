@@ -39,26 +39,30 @@ public class Graph {
         }
     }
 
-    public void dfs( String label ){
+    public List<String> dfs( String label, List<String> arr ){
         if( nodes.get(label).isVisited() ) {
-            return;
+            return arr;
         }
-        System.out.println(label);
+        arr.add(label);
+        // System.out.println(label);
         nodes.get(label).visit();
         for ( String child: adjList.get(label)){
-            dfs(child);
+            arr =  dfs(child, arr) ;
         }
+        return  arr;
     }
 
-    public void dfs( Node root ){
+    public List<Node> dfs( Node root, List<Node> arr ){
         if( root.isVisited() ) {
-            return;
+            return arr;
         }
-        System.out.println(root.label);
+        // System.out.println(root.label);
         root.visit();
+        arr.add(root);
         for ( Node child: root.childs){
-            dfs(child);
+            arr = dfs(child, arr);
         }
+        return arr;
     }
 
     public void bfs(String label) {
