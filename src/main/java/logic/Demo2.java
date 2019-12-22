@@ -43,7 +43,7 @@ public class Demo2  {
             // fixAgent = mainContainer.createNewAgent("fixed", "ensias.tp3.AgentFixe", new Object[]{""});
             // fixAgent.start();
             mobileAgent = mainContainer.createNewAgent(
-                    "MAgent", "logic.AgentMobile",new Object []{itinéraire}) ;
+                    "MAgent", "logic.AgentMobile",new Object []{mainContainer, itinéraire}) ;
             mobileAgent.start();
         } catch (StaleProxyException e) { e.printStackTrace();
         }

@@ -116,4 +116,9 @@ public class Graph {
         }
     }
 
+
+    public String getJson() {
+        return  "";
+    }
+
 }

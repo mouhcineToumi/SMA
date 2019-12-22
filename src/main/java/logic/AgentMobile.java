@@ -1,7 +1,12 @@
 package logic;
 
+import agents.env.AgentFix;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.TickerBehaviour;
+import jade.wrapper.AgentController;
+import jade.wrapper.ContainerController;
+import jade.wrapper.StaleProxyException;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -25,10 +30,21 @@ public class AgentMobile extends Agent {
             System.out.println("Usage : <itineraire>");
             doDelete() ; //appelle takeDown()
         }
-        else {
+        else if (args.length == 2) {
+            ContainerController mainController = (ContainerController) args[0];
+            try {
+                AgentController mobileAgent = mainController.createNewAgent(
+                        "MAgent2", "logic.AgentMobile",new Object []{ args[1]}) ;
+                mobileAgent.start();
+            } catch (StaleProxyException e) {
+                e.printStackTrace();
+            }
+        }
+        else if ( args.length == 1) {
+            System.out.println("name: " + getLocalName() );
             itineraire = (List<Node>) args[0];
-            addBehaviour(new CyclicBehaviour(this) {
-                public void action() {
+            addBehaviour(new TickerBehaviour(this, 1000) {
+                public void onTick() {
                     Iterator<Node> iterator = itineraire.listIterator();
                     try{
                         // Move to next container
