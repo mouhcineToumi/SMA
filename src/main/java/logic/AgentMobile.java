@@ -49,6 +49,7 @@ public class AgentMobile extends Agent {
     @Override
     protected void beforeMove() {
         super.beforeMove();
+
 //        System.out.println("moving: " + this.getLocalName() );
     }
 

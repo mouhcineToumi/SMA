@@ -2,14 +2,11 @@ package logic;
 
 import agents.env.JadeContainer;
 import agents.env.MainContainer;
-import jade.core.ContainerID;
-import jade.core.Location;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Demo2  {
@@ -33,6 +30,7 @@ public class Demo2  {
         for( int i =1; i<6; i++ ){
             graph.addNode(new Node( "Node-" + i ));
         }
+        // defining edges
         graph.addEdge("Node", "Node-1");
         graph.addEdge("Node", "Node-2");
         graph.addEdge("Node-2", "Node-3");
