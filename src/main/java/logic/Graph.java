@@ -56,7 +56,6 @@ public class Graph {
         if( root.isVisited() ) {
             return arr;
         }
-        // System.out.println(root.label);
         root.visit();
         arr.add(root);
         for ( Node child: root.childs){
@@ -91,9 +90,9 @@ public class Graph {
     }
 
 
-    public void bfs(Node root) {
+    public List<Node> bfs(Node root, List<Node> arr) {
         if( root.childs.size() == 0){
-            return;
+            return new ArrayList<Node>();
         }
         LinkedList<Node> queue = new LinkedList<>();
         queue.add(root);
@@ -102,9 +101,8 @@ public class Graph {
             Node currentFirst = queue.removeFirst();
             if (currentFirst.isVisited())
                 continue;
-
-            System.out.println(currentFirst.label);
             currentFirst.visit();
+            arr.add(currentFirst);
             List<Node> allNeighbors = nodes.get(currentFirst.label).childs;
             if (allNeighbors == null)
                 continue;
@@ -113,6 +111,15 @@ public class Graph {
                     queue.add(neighbor);
                 }
             }
+        }
+
+        return arr;
+    }
+
+    public void clear() {
+        for( int i=1; i< nodes.size(); i++){
+            System.out.println(i);
+            nodes.get("Node-"+i).unVisit();
         }
     }
 
