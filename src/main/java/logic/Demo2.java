@@ -46,8 +46,8 @@ public class Demo2  {
         itinéraire2 = graph.bfs(graph.nodes.get("Node-4"), new ArrayList<Node>());
 
         try {
-            // fixAgent = mainContainer.createNewAgent("fixed", "logic.AgentFixe", new Object[]{""});
-            //fixAgent.start();
+            fixAgent = mainContainer.createNewAgent("fixed", "logic.AgentFixe", new Object[]{""});
+            fixAgent.start();
 
             mobileAgent = mainContainer.createNewAgent(
                     "MAgent", "logic.AgentMobile",new Object []{itinéraire, "police"}) ;

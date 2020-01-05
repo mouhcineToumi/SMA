@@ -29,10 +29,6 @@ public class AgentMobile extends Agent {
 
 
     public void setup() {
-        getContentManager().registerLanguage(new SLCodec(),
-                FIPANames.ContentLanguage.FIPA_SL0);
-        getContentManager().registerOntology(MobilityOntology.getInstance());
-
 
         Object args[] = this.getArguments() ;
         if (args == null || args.length < 1) {
@@ -52,13 +48,14 @@ public class AgentMobile extends Agent {
         else if ( args.length == 2) {
             System.out.println("name: " + getLocalName() );
             itineraire = (List<Node>) args[0];
-            long time = 1000;
+            long time = 2000;
 
             if (args[1].toString().equals("sick")){
-                time = 2000;
+                time = 3000;
             }
             addBehaviour(new TickerBehaviour(this, time) {
                 public void onTick() {
+
                     Iterator<Node> iterator = itineraire.listIterator();
                     try{
                         // Move to next container
@@ -75,7 +72,9 @@ public class AgentMobile extends Agent {
                         }
 
                         iterator.remove();
+                        System.out.println("moved from" + myAgent.here());
                         myAgent.doMove(destination.loc);
+                        System.out.println("moved to: " +destination.loc);
                     } catch (Exception e) {
                         myAgent.doDelete();
                     }
@@ -97,6 +96,10 @@ public class AgentMobile extends Agent {
     @Override
     protected void afterMove() {
         super.afterMove();
+
+        getContentManager().registerLanguage(new SLCodec(), FIPANames.ContentLanguage.FIPA_SL0);
+        getContentManager().registerOntology(MobilityOntology.getInstance());
+        addBehaviour(new GetAvailableLocationsBehaviour((AgentMobile) this));
 //        System.out.println("moved: " + this.getLocalName()  );
     }
 }

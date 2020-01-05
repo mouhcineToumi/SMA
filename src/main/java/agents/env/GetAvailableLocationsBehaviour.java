@@ -1,5 +1,6 @@
 package agents.env;
 
+import jade.content.lang.sl.SLCodec;
 import jade.content.onto.basic.Action;
 import jade.content.onto.basic.Result;
 import jade.core.AID;
@@ -10,18 +11,17 @@ import jade.domain.mobility.MobilityOntology;
 import jade.lang.acl.ACLMessage;
 import jade.proto.SimpleAchieveREInitiator;
 import jade.util.leap.Iterator;
+import logic.AgentMobile;
 
 public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
 
 
     private ACLMessage request;
     public GetAvailableLocationsBehaviour(Agent a) {
-
-        // call the constructor of FipaRequestInitiatorBehaviour
         super(a, new ACLMessage(ACLMessage.REQUEST));
+        request = (ACLMessage)getDataStore().get(REQUEST_KEY);
 
         // fills all parameters of the request ACLMessage
-        request = (ACLMessage)getDataStore().get(REQUEST_KEY);
         request.clearAllReceiver();
         request.addReceiver(a.getAMS());
         request.setLanguage(FIPANames.ContentLanguage.FIPA_SL0);
@@ -39,19 +39,37 @@ public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
         }
         catch(Exception e) { e.printStackTrace() ;}
         myAgent.send(request);
+        // reset(request);
+    }
+
+
+    protected void handleNotUnderstood(ACLMessage reply) {
+        System.out.println(myAgent.getLocalName()+ " handleNotUnderstood : "+reply.toString());
+    }
+
+    protected void handleRefuse(ACLMessage reply) {
+        System.out.println(myAgent.getLocalName()+ " handleRefuse : "+reply.toString());
+    }
+
+    protected void handleFailure(ACLMessage reply) {
+        System.out.println(myAgent.getLocalName()+ " handleFailure : "+reply.toString());
+    }
+
+    protected void handleAgree(ACLMessage reply) {
     }
 
 
     protected void handleInform(ACLMessage inform) {
         try {
+            myAgent.getContentManager().registerLanguage(new SLCodec(), FIPANames.ContentLanguage.FIPA_SL0);
+            myAgent.getContentManager().registerOntology(MobilityOntology.getInstance());
             Result sitesDisponibles = (Result)myAgent.getContentManager().extractContent(inform);
             Iterator iterator = sitesDisponibles.getItems().iterator();
-            System.out.println( sitesDisponibles.getItems().get(2) );
+
             System.out.println("\n\n\nSites disponibles :");
-            System.out.println(sitesDisponibles.getItems());
             while(iterator.hasNext()){
                 AID id = (AID) iterator.next();
-                System.out.println(id.getLocalName());
+                System.out.println( myAgent.here() + "-----" + myAgent.getLocalName() +  "+++++ " + id.getLocalName());
                 //System.out.println(iterator.next());
             }
             System.out.println("\n\n\n");

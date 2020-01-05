@@ -51,7 +51,6 @@ public class AgentFix extends Agent {
             }
         });
 
-        addBehaviour(new GetAvailableLocationsBehaviour(this));
         // cleans current container if intrus comes back up
 
     }
