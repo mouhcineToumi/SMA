@@ -42,9 +42,6 @@ public class AgentFix extends Agent {
             }
         });
 
-
-
-
         // wait for mobile agent ( if intrus n'existe pas or found)
         addBehaviour(new CyclicBehaviour() {
             @Override
@@ -54,6 +51,7 @@ public class AgentFix extends Agent {
             }
         });
 
+        addBehaviour(new GetAvailableLocationsBehaviour(this));
         // cleans current container if intrus comes back up
 
     }

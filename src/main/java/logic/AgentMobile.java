@@ -1,9 +1,13 @@
 package logic;
 
 import agents.env.AgentFix;
+import agents.env.GetAvailableLocationsBehaviour;
+import jade.content.lang.sl.SLCodec;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
+import jade.domain.FIPANames;
+import jade.domain.mobility.MobilityOntology;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
@@ -25,6 +29,11 @@ public class AgentMobile extends Agent {
 
 
     public void setup() {
+        getContentManager().registerLanguage(new SLCodec(),
+                FIPANames.ContentLanguage.FIPA_SL0);
+        getContentManager().registerOntology(MobilityOntology.getInstance());
+
+
         Object args[] = this.getArguments() ;
         if (args == null || args.length < 1) {
             System.out.println("Usage : <itineraire>");
@@ -44,6 +53,7 @@ public class AgentMobile extends Agent {
             System.out.println("name: " + getLocalName() );
             itineraire = (List<Node>) args[0];
             long time = 1000;
+
             if (args[1].toString().equals("sick")){
                 time = 2000;
             }
@@ -57,6 +67,7 @@ public class AgentMobile extends Agent {
                         if ( destination.isContaminated() ){
                             foundIntrus(destination.label);
                         }
+
                         if( args[1].toString().equals("sick") ){
                             System.out.println("---> " + destination.label);
                         }else{
@@ -75,8 +86,6 @@ public class AgentMobile extends Agent {
             });
 
         }
-
-
     }
 
     @Override
