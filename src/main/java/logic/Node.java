@@ -53,6 +53,10 @@ public class Node implements Serializable {
         loc.setAddress("localhost");
     }
 
+    public void unVisit(){
+        this.visited = false;
+    }
+
     public void contaminate(){
         this.contaminated = true;
     }

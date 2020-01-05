@@ -30,20 +30,24 @@ public class AgentMobile extends Agent {
             System.out.println("Usage : <itineraire>");
             doDelete() ; //appelle takeDown()
         }
-        else if (args.length == 2) {
+        else if (args.length == 3) {
             ContainerController mainController = (ContainerController) args[0];
             try {
                 AgentController mobileAgent = mainController.createNewAgent(
-                        "MAgent2", "logic.AgentMobile",new Object []{ args[1]}) ;
+                        this.getLocalName(), "logic.AgentMobile",new Object []{ args[1], args[2]}) ;
                 mobileAgent.start();
             } catch (StaleProxyException e) {
                 e.printStackTrace();
             }
         }
-        else if ( args.length == 1) {
+        else if ( args.length == 2) {
             System.out.println("name: " + getLocalName() );
             itineraire = (List<Node>) args[0];
-            addBehaviour(new TickerBehaviour(this, 1000) {
+            long time = 1000;
+            if (args[1].toString().equals("sick")){
+                time = 2000;
+            }
+            addBehaviour(new TickerBehaviour(this, time) {
                 public void onTick() {
                     Iterator<Node> iterator = itineraire.listIterator();
                     try{
@@ -53,7 +57,12 @@ public class AgentMobile extends Agent {
                         if ( destination.isContaminated() ){
                             foundIntrus(destination.label);
                         }
-                        System.out.println(destination.label);
+                        if( args[1].toString().equals("sick") ){
+                            System.out.println("---> " + destination.label);
+                        }else{
+                            System.out.println(destination.label);
+                        }
+
                         iterator.remove();
                         myAgent.doMove(destination.loc);
                     } catch (Exception e) {
