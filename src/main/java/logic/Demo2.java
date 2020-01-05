@@ -21,7 +21,7 @@ public class Demo2  {
     public Demo2() {
         mainContainer = new MainContainer().getContainer();
         // init contaners
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10; i++) {
             new JadeContainer().getContainer();
         }
         // define the graph nodes
@@ -46,8 +46,9 @@ public class Demo2  {
         itinéraire2 = graph.bfs(graph.nodes.get("Node-4"), new ArrayList<Node>());
 
         try {
-            // fixAgent = mainContainer.createNewAgent("fixed", "ensias.tp3.AgentFixe", new Object[]{""});
-            // fixAgent.start();
+            // fixAgent = mainContainer.createNewAgent("fixed", "logic.AgentFixe", new Object[]{""});
+            //fixAgent.start();
+
             mobileAgent = mainContainer.createNewAgent(
                     "MAgent", "logic.AgentMobile",new Object []{itinéraire, "police"}) ;
             mobileAgent2 = mainContainer.createNewAgent(

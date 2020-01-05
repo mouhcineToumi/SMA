@@ -118,7 +118,6 @@ public class Graph {
 
     public void clear() {
         for( int i=1; i< nodes.size(); i++){
-            System.out.println(i);
             nodes.get("Node-"+i).unVisit();
         }
     }
