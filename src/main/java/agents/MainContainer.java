@@ -1,4 +1,4 @@
-package agents.env;
+package agents;
 
 import jade.core.ProfileImpl;
 import jade.core.Runtime;

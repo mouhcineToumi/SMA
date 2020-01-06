@@ -8,7 +8,7 @@ import java.util.List;
 public class Graph {
 
     HashMap<String, List<String>> adjList;
-    HashMap<String, Node> nodes;
+    public HashMap<String, Node> nodes;
 
     public  Graph() {
         nodes = new HashMap<>();
@@ -117,8 +117,9 @@ public class Graph {
     }
 
     public void clear() {
+        nodes.get("root").unVisit();
         for( int i=1; i< nodes.size(); i++){
-            nodes.get("Node-"+i).unVisit();
+            nodes.get("node-"+i).unVisit();
         }
     }
 
