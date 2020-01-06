@@ -78,7 +78,7 @@ public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
                 System.out.println("\t\t\t\t-------- KILL ---------");
                 AgentContainer container =(AgentContainer) myAgent.getContainerController();
                 AgentController victim = container.getAgent("Virus");
-                //victim.kill();
+                victim.kill();
                 System.out.println("\t\t\t\t-------- KILLED -------");
                 System.out.println("\t\t\t\t######################");
             }

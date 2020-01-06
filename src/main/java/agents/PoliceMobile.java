@@ -11,16 +11,17 @@ public class PoliceMobile extends AgentMobile {
     protected void beforeMove() {
         super.beforeMove();
 
-        if ( destination.isContaminated() ){
-            System.out.println("purifying " + destination.label);
-            destination.unContaminate();
-        }
     }
 
 
     @Override
     protected void afterMove() {
         super.afterMove();
+
+        if ( this.destination.isContaminated() ){
+            System.out.println("purifying " + this.destination.label);
+            this.destination.unContaminate();
+        }
 
         getContentManager().registerOntology(MobilityOntology.getInstance());
         getContentManager().registerLanguage(new SLCodec(), FIPANames.ContentLanguage.FIPA_SL0);
