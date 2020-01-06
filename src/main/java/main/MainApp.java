@@ -25,14 +25,15 @@ public class MainApp {
     public MainApp() {
         mainContainer = new MainContainer().getContainer();
 
-        // init contaners
+        // define contaners
         containers.put("root",  new JadeContainer("root").getContainer());
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 7; i++) {
             containers.put("node-"+i,  new JadeContainer("node-"+i).getContainer());
         }
-        // define the graph nodes
+
+        // define nodes
         graph.addNode(new Node("root"));
-        for( int i =1; i<9; i++ ){
+        for( int i =1; i<6; i++ ){
             graph.addNode(new Node( "node-" + i ));
         }
         // defining edges
@@ -41,16 +42,15 @@ public class MainApp {
         graph.addEdge("node-2", "node-3");
         graph.addEdge("node-2", "node-4");
         graph.addEdge("node-2", "node-5");
-        graph.addEdge("node-4", "node-6");
-        graph.addEdge("node-4", "node-7");
-        graph.addEdge("node-4", "node-8");
+        //graph.addEdge("node-4", "node-6");
+        //graph.addEdge("node-4", "node-7");
+        //graph.addEdge("node-4", "node-8");
         // define intrus
-        graph.nodes.get("node-4").contaminate();
+        graph.nodes.get("node-2").contaminate();
 
-        itinéraire = graph.dfs(graph.nodes.get("root"), new ArrayList<Node>());
-        graph.clear();
-        itinéraire2 = graph.bfs(graph.nodes.get("node-2"), new ArrayList<Node>());
 
+        itinéraire = graph.getDFS("root");
+        itinéraire2 = graph.getBFS("node-2");
         try {
 
             fixAgent = containers.get("root").createNewAgent("FPolice", "agents.AgentFixe", new Object[]{itinéraire, "police", 1000});

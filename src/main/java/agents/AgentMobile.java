@@ -43,7 +43,6 @@ public class AgentMobile extends Agent {
                         // Move to next container
                         destination =iterator.next();
                         iterator.remove();
-                        System.out.println("from : " + myAgent.here().getName() + " ----> to : " + destination.loc.getName());
 
                         //beforeMove
                         myAgent.doMove(destination.loc);
@@ -59,22 +58,4 @@ public class AgentMobile extends Agent {
     }
 
 
-    @Override
-    protected void beforeMove() {
-        super.beforeMove();
-
-        if ( destination.isContaminated() ){
-            foundIntrus(destination.label);
-        }
-        System.out.println(destination.label);
-    }
-
-    @Override
-    protected void afterMove() {
-        super.afterMove();
-
-        getContentManager().registerOntology(MobilityOntology.getInstance());
-        getContentManager().registerLanguage(new SLCodec(), FIPANames.ContentLanguage.FIPA_SL0);
-        addBehaviour(new GetAvailableLocationsBehaviour((AgentMobile) this));
-    }
 }

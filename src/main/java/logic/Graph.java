@@ -123,6 +123,22 @@ public class Graph {
         }
     }
 
+    public List<Node> getDFS(String start) {
+        List<Node> itinéraire = this.dfs(nodes.get(start), new ArrayList<Node>());
+        itinéraire.remove(0);
+        this.clear();
+        return itinéraire;
+    }
+
+    public List<Node> getBFS(String start) {
+        List<Node> itinéraire = this.bfs(nodes.get(start), new ArrayList<Node>());
+        itinéraire.remove(0);
+        this.clear();
+        return itinéraire;
+    }
+
+
+
 
     public String getJson() {
         return  "";

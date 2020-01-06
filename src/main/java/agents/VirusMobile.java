@@ -1,5 +1,9 @@
 package agents;
 
+import jade.content.lang.sl.SLCodec;
+import jade.domain.FIPANames;
+import jade.domain.mobility.MobilityOntology;
+
 public class VirusMobile extends AgentMobile {
 
 
@@ -7,10 +11,18 @@ public class VirusMobile extends AgentMobile {
     protected void beforeMove() {
         super.beforeMove();
 
-        if ( destination.isContaminated() ){
-            foundIntrus(destination.label);
-        }
-        System.out.println("Virus : " + destination.label);
+        System.out.println("\t\t\t\t\t\t\t\t\tVirus : " + "from : " + here().getName() + " ----> to : " + destination.loc.getName() );
+    }
+
+
+    @Override
+    protected void afterMove() {
+        super.afterMove();
+        destination.contaminate();
+
+        getContentManager().registerOntology(MobilityOntology.getInstance());
+        getContentManager().registerLanguage(new SLCodec(), FIPANames.ContentLanguage.FIPA_SL0);
+        addBehaviour( new GetAvailableLocationsBehaviour((AgentMobile) this) );
     }
 
 
