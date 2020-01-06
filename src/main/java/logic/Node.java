@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Node implements Serializable {
 
-    ContainerID loc;
-    String label;
+    public ContainerID loc;
+    public String label;
     List<Node> childs;
     private boolean contaminated;
     private boolean visited;

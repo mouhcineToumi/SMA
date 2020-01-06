@@ -1,4 +1,4 @@
-package agents.env;
+package agents;
 
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.basic.Action;
@@ -13,7 +13,6 @@ import jade.proto.SimpleAchieveREInitiator;
 import jade.util.leap.Iterator;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
-import logic.AgentMobile;
 
 import java.util.ArrayList;
 
@@ -76,15 +75,14 @@ public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
             while(iterator.hasNext()){
                 AID id = (AID) iterator.next();
                 arr.add(id.getLocalName());
-                //System.out.println( myAgent.here() + "-----" + myAgent.getLocalName() +  "+++++ " + id.getLocalName());
             }
             System.out.println(arr);
 
-            if ( arr.contains("MAgent") && arr.contains("MAgent2")){
+            if ( ( arr.contains("FAgent") || arr.contains("MPolice")) && arr.contains("Virus")){
                 System.out.println("KILL");
                 AgentContainer container =(AgentContainer) myAgent.getContainerController();
-                AgentController victim = container.getAgent("MAgent2");
-                victim.kill();
+                AgentController victim = container.getAgent("Virus");
+                //victim.kill();
                 System.out.println("KILLED");
             }
             System.out.println("\n");
@@ -92,5 +90,6 @@ public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
         catch(Exception e) {
             e.printStackTrace();
         }
+
     }
 }
