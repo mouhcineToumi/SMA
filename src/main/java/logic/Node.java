@@ -26,10 +26,11 @@ public class Node implements Serializable {
     public boolean isVisited() {
         return this.visited;
     }
-
     public void visit() {
         this.visited = true;
     }
+
+
 
     public boolean isChild(String label) {
         for ( Node node: childs){
@@ -60,7 +61,7 @@ public class Node implements Serializable {
     public void contaminate(){
         this.contaminated = true;
     }
-
+    public void unContaminate() {this.contaminated = false; }
     public boolean isContaminated(){
         return  contaminated;
     }

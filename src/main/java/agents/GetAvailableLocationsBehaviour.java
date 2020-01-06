@@ -15,6 +15,7 @@ import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
 
@@ -46,21 +47,6 @@ public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
     }
 
 
-    protected void handleNotUnderstood(ACLMessage reply) {
-        System.out.println(myAgent.getLocalName()+ " handleNotUnderstood : "+reply.toString());
-    }
-
-    protected void handleRefuse(ACLMessage reply) {
-        System.out.println(myAgent.getLocalName()+ " handleRefuse : "+reply.toString());
-    }
-
-    protected void handleFailure(ACLMessage reply) {
-        System.out.println(myAgent.getLocalName()+ " handleFailure : "+reply.toString());
-    }
-
-    protected void handleAgree(ACLMessage reply) {
-    }
-
 
     protected void handleInform(ACLMessage inform) {
         try {
@@ -71,19 +57,28 @@ public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
 
             ArrayList<String> arr = new ArrayList<String>();
 
-            System.out.println("agents disponibles :");
             while(iterator.hasNext()){
                 AID id = (AID) iterator.next();
                 arr.add(id.getLocalName());
             }
-            System.out.println(arr);
 
-            if ( ( arr.contains("FAgent") || arr.contains("MPolice")) && arr.contains("Virus")){
-                System.out.println("KILL");
+            if ( myAgent.getLocalName().equals("Virus") ){
+                System.out.println("\t\t\t\t\t\t\t\t\tagents disponibles :");
+                System.out.println("\t\t\t\t\t\t\t\t\t" + arr);
+            }else{
+                System.out.println("agents disponibles :");
+                System.out.println(arr);
+            }
+
+            if ( ( arr.contains("FPolice") || arr.contains("MPolice")) && arr.contains("Virus")){
+
+                System.out.println("\t\t\t\t#######################");
+                System.out.println("\t\t\t\t-------- KILL ---------");
                 AgentContainer container =(AgentContainer) myAgent.getContainerController();
                 AgentController victim = container.getAgent("Virus");
                 //victim.kill();
-                System.out.println("KILLED");
+                System.out.println("\t\t\t\t-------- KILLED -------");
+                System.out.println("\t\t\t\t######################");
             }
             System.out.println("\n");
         }
