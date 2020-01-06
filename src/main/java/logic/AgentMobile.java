@@ -72,9 +72,9 @@ public class AgentMobile extends Agent {
                         }
 
                         iterator.remove();
-                        System.out.println("moved from" + myAgent.here());
+                        System.out.println("\nmoved from" + myAgent.here() + "to: " + destination.loc);
                         myAgent.doMove(destination.loc);
-                        System.out.println("moved to: " +destination.loc);
+//                        System.out.println("to: " + destination.loc);
                     } catch (Exception e) {
                         myAgent.doDelete();
                     }

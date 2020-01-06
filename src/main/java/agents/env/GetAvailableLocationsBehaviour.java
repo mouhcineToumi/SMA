@@ -11,7 +11,11 @@ import jade.domain.mobility.MobilityOntology;
 import jade.lang.acl.ACLMessage;
 import jade.proto.SimpleAchieveREInitiator;
 import jade.util.leap.Iterator;
+import jade.wrapper.AgentContainer;
+import jade.wrapper.AgentController;
 import logic.AgentMobile;
+
+import java.util.ArrayList;
 
 public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
 
@@ -66,13 +70,24 @@ public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
             Result sitesDisponibles = (Result)myAgent.getContentManager().extractContent(inform);
             Iterator iterator = sitesDisponibles.getItems().iterator();
 
-            System.out.println("\n\n\nSites disponibles :");
+            ArrayList<String> arr = new ArrayList<String>();
+
+            System.out.println("agents disponibles :");
             while(iterator.hasNext()){
                 AID id = (AID) iterator.next();
-                System.out.println( myAgent.here() + "-----" + myAgent.getLocalName() +  "+++++ " + id.getLocalName());
-                //System.out.println(iterator.next());
+                arr.add(id.getLocalName());
+                //System.out.println( myAgent.here() + "-----" + myAgent.getLocalName() +  "+++++ " + id.getLocalName());
             }
-            System.out.println("\n\n\n");
+            System.out.println(arr);
+
+            if ( arr.contains("MAgent") && arr.contains("MAgent2")){
+                System.out.println("KILL");
+                AgentContainer container =(AgentContainer) myAgent.getContainerController();
+                AgentController victim = container.getAgent("MAgent2");
+                victim.kill();
+                System.out.println("KILLED");
+            }
+            System.out.println("\n");
         }
         catch(Exception e) {
             e.printStackTrace();
