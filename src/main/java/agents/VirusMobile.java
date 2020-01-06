@@ -10,8 +10,6 @@ public class VirusMobile extends AgentMobile {
     @Override
     protected void beforeMove() {
         super.beforeMove();
-
-        System.out.println("\t\t\t\t\t\t\t\t\tVirus : " + "from : " + here().getName() + " ----> to : " + destination.loc.getName() );
     }
 
 
