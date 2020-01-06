@@ -63,9 +63,11 @@ public class GetAvailableLocationsBehaviour extends SimpleAchieveREInitiator {
             }
 
             if ( myAgent.getLocalName().equals("Virus") ){
-                System.out.println("\t\t\t\t\t\t\t\t\tagents disponibles :");
+                System.out.println("\t\t\t\t\t\t\t\t\t Virus: ----> to : " + ((AgentMobile)this.myAgent).destination.loc.getName());
+                System.out.println("\t\t\t\t\t\t\t\t\t agents disponibles :");
                 System.out.println("\t\t\t\t\t\t\t\t\t" + arr);
             }else{
+                System.out.println("Police ----> to : " + ((AgentMobile)this.myAgent).destination.loc.getName());
                 System.out.println("agents disponibles :");
                 System.out.println(arr);
             }

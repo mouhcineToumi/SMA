@@ -15,8 +15,6 @@ public class PoliceMobile extends AgentMobile {
             System.out.println("purifying " + destination.label);
             destination.unContaminate();
         }
-        System.out.println("Police : " + destination.label);
-        System.out.println("from : " + here().getName() + " ----> to : " + destination.loc.getName());
     }
 
 
